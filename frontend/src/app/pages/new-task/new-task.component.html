@@ -1,0 +1,14 @@
+<div class="centered-content">
+    <div class="model-box">
+        <h1 class="title">
+            Create a new task
+        </h1>
+
+        <input #taskTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter your task title...">
+        <br><br>
+        <div class="buttons is-right">
+            <button routerLink="./../" class="button is-medium">Cancel</button>
+            <button class="button is-primary has-text-white is-medium" (click)="createTask(taskTitleInput.value)">Create</button>
+        </div>
+    </div>
+</div>

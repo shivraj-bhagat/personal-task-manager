@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
@@ -12,6 +13,9 @@ const routes: Routes = [
   }, {
     path: 'new-list',
     component: NewListComponent
+  }, {
+    path: 'login',
+    component: LoginPageComponent
   }, {
     path: 'lists',
     component: TaskViewComponent

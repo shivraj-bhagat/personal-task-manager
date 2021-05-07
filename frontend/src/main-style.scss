@@ -9,7 +9,7 @@ $light: #f8f8f8;
 // update bulma globle values
 $family-sans-serif: 'Nunito', sans-serif;
 $primary: $green;
-$link: $light-green;
+$link: $turquoise;
 
 $color-border-width: 2px;
 $input-border-color: transparent;
@@ -51,4 +51,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.white-box {
+    padding: 35px;
+    background: white;
+    border-radius: 5px;
 }

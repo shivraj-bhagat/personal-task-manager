@@ -40,11 +40,11 @@ UserSchema.methods.toJSON = function() {
     return _.omit(userObject, ['password', 'sessions']);
 }
 
-UserSchema.methods.generateAccessAuthToken = function() {
+UserSchema.methods.generateAccessAuthToken = function () {
     const user = this;
     return new Promise((resolve, reject) => {
-        jwt.sign({ _id: user._id.toHexString() }, jwtSecret, { expiresIn: '15m'}, (err, token) => {
-            if(!err) {
+        jwt.sign({ _id: user._id.toHexString() }, jwtSecret, { expiresIn: "15m" }, (err, token) => {
+            if (!err) {
                 resolve(token);
             } else {
                 reject();
@@ -76,6 +76,10 @@ UserSchema.methods.createSession = function() {
 }
 
 // model methods (static methods)
+UserSchema.statics.getJWTSecret = () => {
+    return jwtSecret;
+}
+
 UserSchema.statics.findByIdAndToken = function (_id, token) {
     const User = this;
     return User.findOne({

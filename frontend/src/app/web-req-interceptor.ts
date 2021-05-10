@@ -9,19 +9,19 @@ import { AuthService } from './auth.service';
 })
 export class WebReqInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) { }
-
   refreshingAccessToken: boolean;
   accessTokenRefreshed: Subject<any> = new Subject();
-
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     request = this.addAuthHeader(request);
+
+    // call next() and handle the response
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
+        // console.log(error);
 
-        if (error.status === 401) {
+        if (error.status === 401 && !this.refreshingAccessToken) {
           // 401 error so we are unauthorized
 
           // refresh the access token
@@ -45,17 +45,8 @@ export class WebReqInterceptor implements HttpInterceptor {
   }
 
   refreshAccessToken() {
-    if (this.refreshingAccessToken) {
-      return new Observable(observer => {
-        this.accessTokenRefreshed.subscribe(() => {
-          // this code will run when the access token has been refreshed
-          observer.next();
-          observer.complete();
-        })
-      })
-    } else {
+
       this.refreshingAccessToken = true;
-      // we want to call a method in the auth service to send a request to refresh the access token
       return this.authService.getNewAccessToken().pipe(
         tap(() => {
           console.log("Access Token Refreshed!");
@@ -63,8 +54,7 @@ export class WebReqInterceptor implements HttpInterceptor {
           this.accessTokenRefreshed.next();
         })
       )
-    }
-    
+
   }
 
 

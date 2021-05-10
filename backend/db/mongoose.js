@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TaskManager', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect( process.env.DATABASE , { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('Connect to mongodb successfully!!!');
 }).catch((err) => {
     console.log("Error While attempting to connect to mongodb");
